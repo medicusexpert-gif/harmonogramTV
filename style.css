@@ -6,11 +6,77 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 .nav-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 2px 8px; font-size: 1.3vh; cursor: pointer; border-radius: 3px; }
 .nav-btn.active { color: #00ff00; border-color: #00ff00; background: #064e3b; }
 
-.header { height: 4.5vh; display: flex; justify-content: space-between; align-items: center; padding: 0 1vw; }
-.title { font-size: 2.4vh; font-weight: bold; color: #38bdf8; }
-.time-box { display: flex; align-items: center; gap: 15px; }
-.refresh-btn { background: #0ea5e9; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 1.4vh; }
-.refresh-btn:hover { background: #0284c7; }
+/* Układ nagłówka */
+.header {
+    height: 8vh; /* Zwiększamy wysokość nagłówka */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1vw;
+    background: #0f172a;
+    border-bottom: 2px solid #1e293b;
+}
+
+/* Tytuł miesiąca */
+.title {
+    font-size: 3.5vh; /* Duży i czytelny */
+    font-weight: bold;
+    color: #38bdf8;
+    min-width: 250px;
+}
+
+/* Kontener przycisków między tytułem a zegarem */
+.nav-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.nav-btn {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 5px 10px;
+    font-size: 1.2vh; /* Małe przyciski, by nie psuły układu */
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.nav-btn.active {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: #064e3b;
+}
+
+/* Zegar i przycisk */
+.time-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 350px;
+    justify-content: flex-end;
+}
+
+.time {
+    font-size: 4vh; /* Wielkość jak nagłówek, bardzo czytelny */
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.refresh-btn {
+    background: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.6vh;
+    font-weight: bold;
+}
 
 #table-container { flex-grow: 1; height: 88vh; overflow: hidden; }
 table { width: 100%; height: 100%; border-collapse: separate; border-spacing: 2px; table-layout: fixed; }
