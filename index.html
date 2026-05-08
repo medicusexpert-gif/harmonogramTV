@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonogram Techników</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Nawigacja miesięcy -->
+        <div id="month-nav"></div>
+
+        <!-- Nagłówek z tytułem, przyciskiem i zegarem -->
+        <div class="header">
+            <div class="title" id="current-month-name">MIESIĄC 2026</div>
+            <div class="time-box">
+                <button class="refresh-btn" onclick="loadData()">AKTUALIZUJ</button>
+                <div class="time" id="clock">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Główny kontener tabeli -->
+        <div id="table-container">
+            <!-- Tabela zostanie wygenerowana przez JS -->
+        </div>
+
+        <!-- Stopka z informacją o odświeżeniu -->
+        <div class="footer">
+            Ostatnia aktualizacja danych: <span id="update-time">-</span>
+        </div>
+    </div>
+
+    <!-- Załadowanie skryptu na końcu -->
+    <script src="script.js"></script>
+</body>
+</html>
