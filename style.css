@@ -230,8 +230,11 @@ th { background: #1e293b; text-transform: uppercase; padding: 2px; }
 
 .alarm-pulse { animation: alarm-red 0.8s infinite alternate !important; }
 
-.alarm-pulse span { color: white !important; text-shadow: 1px 1px 4px #000 !important; }
-
+.alarm-pulse span { 
+    color: #00d2ff !important; 
+    text-shadow: 0 0 10px #0044ff, 0 0 20px #0044ff !important; 
+    font-weight: bold !important;
+}
 
 
 /* PASKI BOCZNE */
