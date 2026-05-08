@@ -211,13 +211,9 @@ th { background: #1e293b; text-transform: uppercase; padding: 2px; }
 /* NEONOWY BŁĘKIT 8-16 - KLUCZOWE !IMPORTANT */
 
 .neon-blue-text span {
-
     color: #00d2ff !important;
-
     text-shadow: 0 0 10px #0044ff, 0 0 20px #0044ff !important;
-
     font-weight: bold !important;
-
 }
 
 
