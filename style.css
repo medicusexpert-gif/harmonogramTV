@@ -276,3 +276,12 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
+/* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
+.day { 
+    width: 70px !important; 
+}
+
+/* Szerokość kolumny z datą (2026-05-09 itd.) */
+.date { 
+    width: 100px !important; 
+}
