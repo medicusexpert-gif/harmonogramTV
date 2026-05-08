@@ -30,6 +30,11 @@ async function loadData() {
         const now = new Date();
         const isAlarmTime = (now.getHours() > 15) || (now.getHours() === 15 && now.getMinutes() >= 30);
         const todayCSV = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        
+        // --- NOWOŚĆ: Sprawdzenie czy oglądamy aktualny miesiąc ---
+        const realMonth = String(now.getMonth() + 1).padStart(2, '0');
+        const isCurrentMonthViewed = (currentViewMonth === realMonth);
+        // -------------------------------------------------------
 
         let html = "<table>";
         html += `<colgroup><col style="width: 85px;"><col style="width: 105px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
@@ -46,7 +51,6 @@ async function loadData() {
                 if (j > 5) return; 
 
                 if (i === 0) {
-                    // WIERSZ 1: IMIONA (KOLOROWE)
                     if (j === 0) html += `<th class="logo-space" rowspan="2" colspan="2" id="main-logo-container"></th>`;
                     else if (j > 1) {
                         const nameColors = ["", "", "#38bdf8", "#818cf8", "#fbbf24", "#f472b6"];
@@ -54,7 +58,6 @@ async function loadData() {
                     }
                 } 
                 else if (i === 1) {
-                    // WIERSZ 2: TECHNICY (SZARE)
                     if (j > 1) html += `<th style="color: #64748b; font-size: 1.4vh; font-weight: normal;">${cell}</th>`;
                 } 
                 else {
@@ -66,10 +69,20 @@ async function loadData() {
                     const cellText = cell.toLowerCase();
 
                     if (j > 1) {
-                        if (cellText.includes("8-16")) {
-                            specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
-                        } else if (cellText.includes("parking") || cellText.includes("8:00")) {
-                            textColor = "#64748b"; 
+                        // --- POPRAWIONA LOGIKA KOLOROWANIA ---
+                        
+                        // 1. Jeśli to NIE jest bieżący miesiąc -> wszystko wygaszone (szare)
+                        if (!isCurrentMonthViewed) {
+                            textColor = "#64748b";
+                        } 
+                        // 2. Jeśli to JEST bieżący miesiąc
+                        else {
+                            if (cellText.includes("8-16")) {
+                                specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
+                            } else if (cellText.includes("parking") || cellText.includes("8:00")) {
+                                textColor = "#64748b"; 
+                            }
+                            // Reszta zostaje biała (domyślny textColor)
                         }
                     }
                     
@@ -89,7 +102,6 @@ async function loadData() {
         setTimeout(initSmartMarquee, 200);
     } catch (err) { console.error("Błąd CSV:", err); }
 }
-
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
     spans.forEach(span => {
