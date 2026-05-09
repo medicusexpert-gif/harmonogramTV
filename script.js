@@ -102,8 +102,7 @@ async function loadData() {
         setTimeout(initSmartMarquee, 200);
     } catch (err) { 
     console.error("Błąd CSV:", err); 
-    setTimeout(loadData, 10000); // Brak neta? Spróbuj ponownie za 10 sekund!
-}
+    }
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
     spans.forEach(span => {
