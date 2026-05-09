@@ -37,7 +37,7 @@ async function loadData() {
         // -------------------------------------------------------
 
         let html = "<table>";
-        html += `<colgroup><col style="width: 65px;"><col style="width: 85px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
+        html += `<colgroup><col style="width: 45px;"><col style="width: 65px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
         
         let weekCounter = 0;
         rows.forEach((row, i) => {
