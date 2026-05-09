@@ -100,7 +100,9 @@ async function loadData() {
         document.getElementById("update-time").innerText = new Date().toLocaleTimeString();
         hideWeekends();
         setTimeout(initSmartMarquee, 200);
-    } catch (err) { console.error("Błąd CSV:", err); }
+    } catch (err) { 
+    console.error("Błąd CSV:", err); 
+    setTimeout(loadData, 10000); // Brak neta? Spróbuj ponownie za 10 sekund!
 }
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
@@ -160,4 +162,5 @@ renderNav();
 loadData();
 setInterval(updateClock, 1000);
 updateClock();
-setInterval(loadData, 900000);
+
+setInterval(loadData, 300000); // Odświeżaj dane co 5 minut
