@@ -158,7 +158,11 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 
 
 
-#table-container { flex-grow: 1; height: 88vh; overflow: hidden; }
+#table-container {
+    width: 100%;
+    overflow-x: auto; /* To pozwala na przesuwanie tabeli na boki na małym ekranie */
+    -webkit-overflow-scrolling: touch; /* Sprawia, że przesuwanie palcem na iPhone jest płynne */
+}
 
 table { width: 100%; height: 100%; border-collapse: separate; border-spacing: 2px; table-layout: fixed; }
 
