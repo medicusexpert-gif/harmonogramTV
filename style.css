@@ -271,25 +271,5 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
   80%, 100% { transform: translateX(var(--scroll-dist)); }
 }
-/* --- STEROWANIE SZEROKOŚCIĄ KOLUMN --- */
 
-/* Kolumna 1: LOGO (Klasa .logo-space) */
-th:nth-child(1), td:nth-child(1) {
-    width: 120px !important; /* Tutaj zmieniasz szerokość LOGO */
-}
-
-/* Kolumna 2: DZIEŃ (Klasa .day) */
-th:nth-child(2), td:nth-child(2) {
-    width: 90px !important;  /* Tutaj zmieniasz szerokość kolumny PON, WT... */
-}
-
-/* Kolumna 3: DATA (Klasa .date) */
-th:nth-child(3), td:nth-child(3) {
-    width: 110px !important; /* Tutaj zmieniasz szerokość kolumny 11.05... */
-}
-
-/* Pozostałe kolumny: TECHNICY (zajmą resztę ekranu po równo) */
-th:nth-child(n+4), td:nth-child(n+4) {
-    width: auto !important;
-}
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
