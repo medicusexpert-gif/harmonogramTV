@@ -27,7 +27,6 @@ async function loadData() {
             return r.split(separator).map(cell => cell.replace(/^"(.*)"$/, '$1').trim());
         }).filter(r => r.length > 1);
 
-
         const now = new Date();
         const isAlarmTime = (now.getHours() > 15) || (now.getHours() === 15 && now.getMinutes() >= 30);
         const todayCSV = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -114,20 +113,6 @@ function initSmartMarquee() {
             const distance = span.scrollWidth - box.offsetWidth + 20; 
             span.style.setProperty('--scroll-dist', `-${distance}px`);
             span.classList.add('animate-scroll');
-        }
-    });
-}
-
-        
-        if (span.scrollWidth > box.offsetWidth) {
-            // DLA DŁUGICH TEKSTÓW:
-            const distance = span.scrollWidth - box.offsetWidth + 20; 
-            span.style.setProperty('--scroll-dist', `-${distance}px`);
-            span.classList.add('animate-scroll');
-            span.style.margin = "0"; // Przyklej do lewej, żeby nie ucinało startu
-        } else {
-            // DLA KRÓTKICH TEKSTÓW:
-            span.style.margin = "0 auto"; // Wyśrodkuj
         }
     });
 }
