@@ -277,12 +277,12 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 /* Prawdopodobnie kolumna Dzień */
 td:nth-child(0), th:nth-child(0) { 
-    width: 80px !important; 
+    width: 110px !important; 
 }
 
 /* Prawdopodobnie kolumna Data */
 td:nth-child(1), th:nth-child(1) { 
-    width: 110px !important; 
+    width: 150px !important; 
 }
 
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
