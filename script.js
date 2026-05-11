@@ -17,24 +17,16 @@ const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec"
 const logoUrl = "logo.png";
 let currentViewMonth = String(new Date().getMonth() + 1).padStart(2, '0');
 
-// Funkcja pomocnicza do bezpiecznego dzielenia wiersza CSV
 function parseCSVLine(line) {
     const result = [];
     let cur = "";
     let inQuote = false;
-    // Wykrywamy separator (przecinek lub średnik)
     const sep = line.includes(';') ? ';' : ',';
-
     for (let i = 0; i < line.length; i++) {
         let char = line[i];
-        if (char === '"') {
-            inQuote = !inQuote;
-        } else if (char === sep && !inQuote) {
-            result.push(cur.trim());
-            cur = "";
-        } else {
-            cur += char;
-        }
+        if (char === '"') inQuote = !inQuote;
+        else if (char === sep && !inQuote) { result.push(cur.trim()); cur = ""; }
+        else cur += char;
     }
     result.push(cur.trim());
     return result.map(cell => cell.replace(/^"(.*)"$/, '$1'));
@@ -45,8 +37,6 @@ async function loadData() {
     try {
         const res = await fetch(url);
         const rawData = await res.text();
-        
-        // Dzielimy na wiersze, ale czyścimy puste linie
         const rows = rawData.split(/\r?\n/).filter(line => line.trim() !== "").map(parseCSVLine);
 
         const now = new Date();
@@ -57,7 +47,7 @@ async function loadData() {
         const isCurrentMonthViewed = (currentViewMonth === realMonth);
 
         let html = "<table>";
-        html += `<colgroup><col style="width: 100px;"><col style="width: 130px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
+        html += `<colgroup><col style="width: 90px;"><col style="width: 100px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
         
         let weekCounter = 0;
         rows.forEach((row, i) => {
@@ -90,18 +80,18 @@ async function loadData() {
 
                     if (j > 1) {
                         if (!isCurrentMonthViewed) {
-                            textColor = "#64748b";
+                            textColor = "#64748b"; // WYGASZONE DLA INNYCH MIESIĘCY
                         } else {
                             if (cellText.includes("8-16")) {
                                 specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
                             } else if (cellText.includes("parking") || cellText.includes("8:00")) {
-                                textColor = "#64748b"; 
+                                textColor = "#64748b"; // WYGASZONE DLA PARKINGU
                             }
                         }
                     }
                     
-                    html += `<td class="${className}${specialClass}"><div class="marquee-box"><span>${content}</span></div></td>`;
-                    // Kolor tekstu nadajemy wewnątrz span, by nie psuć animacji
+                    // KLUCZOWA POPRAWKA: Dodanie style="color: ${textColor}" do spana
+                    html += `<td class="${className}${specialClass}"><div class="marquee-box"><span style="color: ${textColor}">${content}</span></div></td>`;
                 }
             });
             html += "</tr>";
