@@ -35,7 +35,7 @@ async function loadData() {
         const isCurrentMonthViewed = (currentViewMonth === realMonth);
 
         let html = "<table>";
-        html += `<colgroup><col style="width: 90px;"><col style="width: 100px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
+        html += `<colgroup><col style="width: 100px;"><col style="width: 130px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
         
         let weekCounter = 0;
         rows.forEach((row, i) => {
