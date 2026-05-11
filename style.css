@@ -276,12 +276,12 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 /* Spróbuj celować w kolejne kolumny */
 
 /* Prawdopodobnie kolumna Dzień */
-td:nth-child(1), th:nth-child(1) { 
+td:nth-child(0), th:nth-child(0) { 
     width: 80px !important; 
 }
 
 /* Prawdopodobnie kolumna Data */
-td:nth-child(3), th:nth-child(3) { 
+td:nth-child(1), th:nth-child(1) { 
     width: 110px !important; 
 }
 
