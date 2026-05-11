@@ -160,7 +160,7 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 
 #table-container {
     width: 100%;
-    overflow-x: auto; /* To pozwala na przesuwanie tabeli na boki na małym ekranie */
+    overflow-x: hidden; /* To pozwala na przesuwanie tabeli na boki na małym ekranie */
     -webkit-overflow-scrolling: touch; /* Sprawia, że przesuwanie palcem na iPhone jest płynne */
 }
 
