@@ -281,7 +281,7 @@ td:nth-child(1), th:nth-child(1) {
 }
 
 /* Prawdopodobnie kolumna Data */
-td:nth-child(2), th:nth-child(2) { 
+td:nth-child(3), th:nth-child(3) { 
     width: 110px !important; 
 }
 
