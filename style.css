@@ -259,7 +259,7 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 /* MARQUEE */
 
-.marquee-box { width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden; justify-content: center; }
+.marquee-box { width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden; justify-content: flex-start; }
 
 .marquee-box span { display: inline-block; white-space: nowrap; padding: 0 10px; }
 
