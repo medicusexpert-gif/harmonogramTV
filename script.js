@@ -31,10 +31,8 @@ async function loadData() {
         const isAlarmTime = (now.getHours() > 15) || (now.getHours() === 15 && now.getMinutes() >= 30);
         const todayCSV = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
         
-        // --- NOWOŚĆ: Sprawdzenie czy oglądamy aktualny miesiąc ---
         const realMonth = String(now.getMonth() + 1).padStart(2, '0');
         const isCurrentMonthViewed = (currentViewMonth === realMonth);
-        // -------------------------------------------------------
 
         let html = "<table>";
         html += `<colgroup><col style="width: 90px;"><col style="width: 100px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
@@ -69,20 +67,15 @@ async function loadData() {
                     const cellText = cell.toLowerCase();
 
                     if (j > 1) {
-                        // --- POPRAWIONA LOGIKA KOLOROWANIA ---
-                        
-                        // 1. Jeśli to NIE jest bieżący miesiąc -> wszystko wygaszone (szare)
                         if (!isCurrentMonthViewed) {
                             textColor = "#64748b";
                         } 
-                        // 2. Jeśli to JEST bieżący miesiąc
                         else {
                             if (cellText.includes("8-16")) {
                                 specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
                             } else if (cellText.includes("parking") || cellText.includes("8:00")) {
                                 textColor = "#64748b"; 
                             }
-                            // Reszta zostaje biała (domyślny textColor)
                         }
                     }
                     
@@ -101,18 +94,29 @@ async function loadData() {
         hideWeekends();
         setTimeout(initSmartMarquee, 200);
     } catch (err) { 
-    console.error("Błąd CSV:", err); 
-    setTimeout(loadData, 10000);} // Brak neta? Spróbuj ponownie za 10 sekund!
+        console.error("Błąd CSV:", err); 
+        setTimeout(loadData, 10000);
+    }
 }
+
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
     spans.forEach(span => {
-        const box = span.parentElement.parentElement; 
+        const box = span.parentElement; // box to marquee-box
         span.classList.remove('animate-scroll');
-        if (span.scrollWidth > box.offsetWidth) {
-            const distance = span.scrollWidth - box.offsetWidth + 20; 
+        
+        // Resetowanie stylu przed sprawdzeniem
+        box.style.justifyContent = "center";
+        
+        if (span.offsetWidth > box.offsetWidth) {
+            // DLA DŁUGICH: Wyrównaj do lewej i oblicz dystans
+            box.style.justifyContent = "flex-start";
+            const distance = span.offsetWidth - box.offsetWidth + 25; 
             span.style.setProperty('--scroll-dist', `-${distance}px`);
             span.classList.add('animate-scroll');
+        } else {
+            // DLA KRÓTKICH: Zostaw na środku
+            box.style.justifyContent = "center";
         }
     });
 }
@@ -162,5 +166,4 @@ renderNav();
 loadData();
 setInterval(updateClock, 1000);
 updateClock();
-
-setInterval(loadData, 300000); // Odświeżaj dane co 5 minut
+setInterval(loadData, 300000);
