@@ -273,14 +273,15 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 }
 /* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
-/* Pierwsza kolumna (Dzień) */
-td:nth-child(1), th:nth-child(1) { 
-    width: 120px !important; 
+/* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
+.day { 
+    width: 200px !important; 
+
 }
 
-/* Druga kolumna (Data) */
-td:nth-child(2), th:nth-child(2) { 
-    width: 160px !important; 
+/* Szerokość kolumny z datą (2026-05-09 itd.) */
+.date { 
+    width: 250px !important; 
 }
 
 
