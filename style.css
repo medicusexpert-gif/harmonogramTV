@@ -284,5 +284,7 @@ td:nth-child(0), th:nth-child(0) {
 td:nth-child(1), th:nth-child(1) { 
     width: 150px !important; 
 }
-
+td:nth-child(1) { background: red !important; }
+td:nth-child(2) { background: blue !important; }
+td:nth-child(3) { background: green !important; } 
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
