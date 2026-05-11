@@ -18,7 +18,7 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 
 .header {
 
-    height: 8vh; /* Zwiększamy wysokość nagłówka */
+    height: 6vh; /* Zwiększamy wysokość nagłówka */
 
     display: flex;
 
