@@ -73,7 +73,7 @@ td:nth-child(5) { border-left: 6px solid #fbbf24; }
 td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 /* MARQUEE - Tutaj usunięto tylko sztywne justify-content */
-.marquee-box { width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden; }
+.marquee-box { width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden; padding: 0; }
 .marquee-box span { display: inline-block; white-space: nowrap; padding: 0 10px; }
 .animate-scroll { animation: smart-scroll 10s linear infinite alternate; }
 
