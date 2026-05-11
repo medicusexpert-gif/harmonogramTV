@@ -17,15 +17,37 @@ const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec"
 const logoUrl = "logo.png";
 let currentViewMonth = String(new Date().getMonth() + 1).padStart(2, '0');
 
+// Funkcja pomocnicza do bezpiecznego dzielenia wiersza CSV
+function parseCSVLine(line) {
+    const result = [];
+    let cur = "";
+    let inQuote = false;
+    // Wykrywamy separator (przecinek lub średnik)
+    const sep = line.includes(';') ? ';' : ',';
+
+    for (let i = 0; i < line.length; i++) {
+        let char = line[i];
+        if (char === '"') {
+            inQuote = !inQuote;
+        } else if (char === sep && !inQuote) {
+            result.push(cur.trim());
+            cur = "";
+        } else {
+            cur += char;
+        }
+    }
+    result.push(cur.trim());
+    return result.map(cell => cell.replace(/^"(.*)"$/, '$1'));
+}
+
 async function loadData() {
     const url = sheetLinks[currentViewMonth];
     try {
         const res = await fetch(url);
-        const data = await res.text();
-        const rows = data.trim().split("\n").map(r => {
-            const separator = r.includes(';') ? ';' : ',';
-            return r.split(separator).map(cell => cell.replace(/^"(.*)"$/, '$1').trim());
-        }).filter(r => r.length > 1);
+        const rawData = await res.text();
+        
+        // Dzielimy na wiersze, ale czyścimy puste linie
+        const rows = rawData.split(/\r?\n/).filter(line => line.trim() !== "").map(parseCSVLine);
 
         const now = new Date();
         const isAlarmTime = (now.getHours() > 15) || (now.getHours() === 15 && now.getMinutes() >= 30);
@@ -35,7 +57,7 @@ async function loadData() {
         const isCurrentMonthViewed = (currentViewMonth === realMonth);
 
         let html = "<table>";
-        html += `<colgroup><col style="width: 100px;"><col style="width: 130px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
+        html += `<colgroup><col style="width: 90px;"><col style="width: 100px;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"><col style="width: auto;"></colgroup>`;
         
         let weekCounter = 0;
         rows.forEach((row, i) => {
@@ -62,15 +84,14 @@ async function loadData() {
                     let className = (j === 0) ? "day" : (j === 1) ? "date" : "tech-data";
                     let content = (j === 0) ? shortenDay(cell) : (j === 1) ? shortenDate(cell) : cell;
                     
-                    let specialClass = "";
                     let textColor = "#ffffff"; 
+                    let specialClass = "";
                     const cellText = cell.toLowerCase();
 
                     if (j > 1) {
                         if (!isCurrentMonthViewed) {
                             textColor = "#64748b";
-                        } 
-                        else {
+                        } else {
                             if (cellText.includes("8-16")) {
                                 specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
                             } else if (cellText.includes("parking") || cellText.includes("8:00")) {
@@ -79,7 +100,8 @@ async function loadData() {
                         }
                     }
                     
-                    html += `<td class="${className}${specialClass}"><div class="marquee-box"><span style="color: ${textColor}">${content}</span></div></td>`;
+                    html += `<td class="${className}${specialClass}"><div class="marquee-box"><span>${content}</span></div></td>`;
+                    // Kolor tekstu nadajemy wewnątrz span, by nie psuć animacji
                 }
             });
             html += "</tr>";
@@ -102,20 +124,14 @@ async function loadData() {
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
     spans.forEach(span => {
-        const box = span.parentElement; // box to marquee-box
+        const box = span.parentElement;
         span.classList.remove('animate-scroll');
-        
-        // Resetowanie stylu przed sprawdzeniem
-        box.style.justifyContent = "center";
-        
         if (span.offsetWidth > box.offsetWidth) {
-            // DLA DŁUGICH: Wyrównaj do lewej i oblicz dystans
             box.style.justifyContent = "flex-start";
             const distance = span.offsetWidth - box.offsetWidth + 25; 
             span.style.setProperty('--scroll-dist', `-${distance}px`);
             span.classList.add('animate-scroll');
         } else {
-            // DLA KRÓTKICH: Zostaw na środku
             box.style.justifyContent = "center";
         }
     });
