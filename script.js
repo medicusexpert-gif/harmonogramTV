@@ -22,18 +22,11 @@ async function loadData() {
     try {
         const res = await fetch(url);
         const data = await res.text();
-       const rows = data.trim().split(/\r?\n/).map(r => {
+        const rows = data.trim().split("\n").map(r => {
             const separator = r.includes(';') ? ';' : ',';
-            // REGEX: Obsługuje przecinki wewnątrz cudzysłowów (naprawia Kwiecień)
-            const regex = new RegExp(`(?:${separator}|\\n|^)(?:"([^"]*(?:""[^"]*)*)"|([^"${separator}\\n]*))`, 'g');
-            let matches = [];
-            let match;
-            while ((match = regex.exec(r)) !== null) {
-                let cell = match[1] !== undefined ? match[1] : match[2];
-                matches.push(cell ? cell.replace(/""/g, '"').trim() : "");
-            }
-            return matches;
+            return r.split(separator).map(cell => cell.replace(/^"(.*)"$/, '$1').trim());
         }).filter(r => r.length > 1);
+
 
         const now = new Date();
         const isAlarmTime = (now.getHours() > 15) || (now.getHours() === 15 && now.getMinutes() >= 30);
@@ -115,8 +108,16 @@ async function loadData() {
 function initSmartMarquee() {
     const spans = document.querySelectorAll('.tech-data span');
     spans.forEach(span => {
-        const box = span.parentElement; // box to marquee-box
+        const box = span.parentElement.parentElement; 
         span.classList.remove('animate-scroll');
+        if (span.scrollWidth > box.offsetWidth) {
+            const distance = span.scrollWidth - box.offsetWidth + 20; 
+            span.style.setProperty('--scroll-dist', `-${distance}px`);
+            span.classList.add('animate-scroll');
+        }
+    });
+}
+
         
         if (span.scrollWidth > box.offsetWidth) {
             // DLA DŁUGICH TEKSTÓW:
