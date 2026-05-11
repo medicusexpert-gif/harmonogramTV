@@ -273,18 +273,16 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
 }
 /* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
-/* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
-.day { 
-    width: 200px !important; 
+/* Spróbuj celować w kolejne kolumny */
 
+/* Prawdopodobnie kolumna Dzień */
+td:nth-child(1), th:nth-child(1) { 
+    width: 80px !important; 
 }
 
-/* Szerokość kolumny z datą (2026-05-09 itd.) */
-.date { 
-    width: 250px !important; 
+/* Prawdopodobnie kolumna Data */
+td:nth-child(2), th:nth-child(2) { 
+    width: 110px !important; 
 }
-td:nth-child(1) { background: red !important; }
-td:nth-child(2) { background: blue !important; }
-td:nth-child(3) { background: green !important; }
 
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
