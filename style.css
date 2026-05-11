@@ -260,8 +260,9 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 .marquee-box {
     width: 100%;
     height: 100%;
-    display: flex; /* Pozwala na działanie margin: auto */
+    display: flex;
     align-items: center;
+    /* Usuwamy justify-content: flex-start; */
     overflow: hidden;
     white-space: nowrap;
 }
@@ -269,8 +270,16 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 .marquee-box span {
     display: inline-block;
     padding: 0 10px;
-    /* margin zostanie ustawiony przez JS powyżej */
+    /* KLUCZ: margines auto wyśrodkuje krótki tekst w flex-boxie */
+    margin: 0 auto; 
 }
+
+/* Kiedy tekst jest długi i dodajemy klasę animacji przez JS */
+.marquee-box span.animate-scroll {
+    /* Usuwamy auto-margines, żeby tekst startował od lewej do animacji */
+    margin-left: 0; 
+}
+
 
 @keyframes smart-scroll {
 
