@@ -160,7 +160,7 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 
 #table-container { flex-grow: 1; height: 88vh; overflow: auto; }
 
-table { width: 100%; height: 100%; border-collapse: separate; border-spacing: 2px; table-layout: fixed; }
+table { width: 100%; height: 100%; border-collapse: separate; border-spacing: 2px; table-layout: auto; }
 
 
 
