@@ -8,23 +8,28 @@
 </head>
 <body>
     <div class="wrapper">
-    <div class="header">
-        <!-- Lewa strona: Nazwa miesiąca -->
-        <div class="title" id="current-month-name">MIESIĄC 2026</div>
-        
-        <!-- Środek: Przyciski miesięcy (teraz tutaj!) -->
-        <div id="month-nav" class="nav-container"></div>
-        
-        <!-- Prawa strona: Przycisk i duży zegar -->
-        <div class="time-box">
-            <button class="refresh-btn" onclick="loadData()">AKTUALIZUJ</button>
-            <div class="time" id="clock">00:00:00</div>
+        <!-- Nawigacja miesięcy -->
+        <div id="month-nav"></div>
+
+        <!-- Nagłówek z tytułem, przyciskiem i zegarem -->
+        <div class="header">
+            <div class="title" id="current-month-name">MIESIĄC 2026</div>
+            <div class="time-box">
+                <button class="refresh-btn" onclick="loadData()">AKTUALIZUJ</button>
+                <div class="time" id="clock">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Główny kontener tabeli -->
+        <div id="table-container">
+            <!-- Tabela zostanie wygenerowana przez JS -->
+        </div>
+
+        <!-- Stopka z informacją o odświeżeniu -->
+        <div class="footer">
+            Ostatnia aktualizacja danych: <span id="update-time">-</span>
         </div>
     </div>
-
-    <div id="table-container"></div>
-    <div class="footer">Ostatnia aktualizacja: <span id="update-time">-</span></div>
-</div>
 
     <!-- Załadowanie skryptu na końcu -->
     <script src="script.js"></script>
