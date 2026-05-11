@@ -271,5 +271,17 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 
   80%, 100% { transform: translateX(var(--scroll-dist)); }
 }
+/* TO ZMIENIA SZEROKOŚĆ KOMÓRKI Z LOGO */
+table th:first-child, 
+table td:first-child {
+    width: 150px !important; /* Zmieniaj tę wartość (np. 100px, 200px), aż logo będzie miało dobrą szerokość */
+    min-width: 150px !important;
+}
 
+/* Upewnij się, że logo nadal chce się rozciągać */
+.table-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: fill; 
+}
 .footer { height: 2vh; text-align: right; font-size: 1.2vh; color: #475569; padding-right: 10px; }
