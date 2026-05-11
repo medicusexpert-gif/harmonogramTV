@@ -274,7 +274,7 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 /* TO ZMIENIA SZEROKOŚĆ KOMÓRKI Z LOGO */
 table th:first-child, 
 table td:first-child {
-    width: 200px !important; /* Zmieniaj tę wartość (np. 100px, 200px), aż logo będzie miało dobrą szerokość */
+    width: 500px !important; /* Zmieniaj tę wartość (np. 100px, 200px), aż logo będzie miało dobrą szerokość */
     min-width: 150px !important;
 }
 
