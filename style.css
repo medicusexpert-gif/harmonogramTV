@@ -274,12 +274,12 @@ td:nth-child(6) { border-left: 6px solid #f472b6; }
 }
 /* Szerokość kolumny z nazwą dnia (Poniedziałek, Wtorek itd.) */
 .day { 
-    width: 140px !important; 
+    width: 200px !important; 
 }
 
 /* Szerokość kolumny z datą (2026-05-09 itd.) */
 .date { 
-    width: 170px !important; 
+    width: 250px !important; 
 }
 
 
