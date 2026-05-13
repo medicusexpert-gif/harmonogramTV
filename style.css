@@ -58,7 +58,13 @@ th { background: #1e293b; text-transform: uppercase; padding: 2px; }
 
 /* Domyślny kolor dla tekstu wewnątrz komórek danych */
 .tech-data span {
+    color: inherit; /* Będzie brał kolor z nadrzędnego elementu lub inline style */
+}
+
+/* Dodaj domyślny biały dla tabeli, żeby span bez stylu był biały */
+table {
     color: #ffffff;
+    /* ... reszta bez zmian ... */
 }
 
 /* Klasa dla niebieskiego świecenia */
