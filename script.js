@@ -70,29 +70,42 @@ async function loadData() {
                 else if (i === 1) {
                     if (j > 1) html += `<th style="color: #64748b; font-size: 1.4vh; font-weight: normal;">${cell}</th>`;
                 } 
-                else {
-                    let className = (j === 0) ? "day" : (j === 1) ? "date" : "tech-data";
-                    let content = (j === 0) ? shortenDay(cell) : (j === 1) ? shortenDate(cell) : cell;
-                    
-                    let textColor = "#ffffff"; 
-                    let specialClass = "";
-                    const cellText = cell.toLowerCase();
+               else {
+    let className = (j === 0) ? "day" : (j === 1) ? "date" : "tech-data";
+    let content = (j === 0) ? shortenDay(cell) : (j === 1) ? shortenDate(cell) : cell;
+    
+    let textColor = "#ffffff"; 
+    let specialClass = "";
+    const cellText = cell.toLowerCase();
 
-                    if (j > 1) {
-                        if (!isCurrentMonthViewed) {
-                            textColor = "#64748b"; // WYGASZONE DLA INNYCH MIESIĘCY
-                        } else {
-                            if (cellText.includes("8-16")) {
-                                specialClass = (isToday && isAlarmTime) ? " alarm-pulse" : " neon-blue-text";
-                            } else if (cellText.includes("parking") || cellText.includes("8:00")) {
-                                textColor = "#64748b"; // WYGASZONE DLA PARKINGU
-                            }
-                        }
-                    }
-                    
-                    // KLUCZOWA POPRAWKA: Dodanie style="color: ${textColor}" do spana
-                    html += `<td class="${className}${specialClass}"><div class="marquee-box"><span style="color: ${textColor}">${content}</span></div></td>`;
-                }
+    // Logika dla kolumn z technikami (j > 1)
+    if (j > 1) {
+        if (!isCurrentMonthViewed) {
+            textColor = "#64748b"; // Wygaszone dla innych miesięcy
+        } else {
+            // SPRAWDZANIE ALARMU (tylko jeśli jest 8-16 i jest po 15:30)
+            if (cellText.includes("8-16") && isToday && isAlarmTime) {
+                specialClass = " alarm-pulse";
+            }
+            
+            // KOLOROWANIE TYLKO FRAZY "8-16"
+            if (cellText.includes("8-16")) {
+                // Zastępujemy "8-16" wersją w kolorowym span, reszta zostaje biała
+                // Używamy Regex z flagą 'i', żeby nie martwić się o wielkość liter
+                content = content.replace(/8-16/i, '<span class="neon-blue-text">8-16</span>');
+            } else if (cellText.includes("parking") || cellText.includes("8:00")) {
+                textColor = "#64748b"; 
+            }
+        }
+    }
+    
+    // Generowanie HTML komórki
+    html += `<td class="${className}${specialClass}">
+                <div class="marquee-box">
+                    <span style="color: ${textColor}">${content}</span>
+                </div>
+             </td>`;
+}
             });
             html += "</tr>";
         });
