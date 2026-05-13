@@ -191,4 +191,4 @@ renderNav();
 loadData();
 setInterval(updateClock, 1000);
 updateClock();
-setInterval(loadData, 300000);
+setInterval(loadData, 120000);
