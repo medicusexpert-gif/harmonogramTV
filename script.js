@@ -70,40 +70,49 @@ async function loadData() {
                 else if (i === 1) {
                     if (j > 1) html += `<th style="color: #64748b; font-size: 1.4vh; font-weight: normal;">${cell}</th>`;
                 } 
-               else {
-                    let className = (j === 0) ? "day" : (j === 1) ? "date" : "tech-data";
-                    let content = (j === 0) ? shortenDay(cell) : (j === 1) ? shortenDate(cell) : cell;
-                    
-                    let inlineStyle = ""; 
-                    let specialClass = "";
-                    const cellText = cell.toLowerCase();
+               // ... fragment wewnątrz rows.forEach -> row.forEach -> else ...
+else {
+    let className = (j === 0) ? "day" : (j === 1) ? "date" : "tech-data";
+    let content = (j === 0) ? shortenDay(cell) : (j === 1) ? shortenDate(cell) : cell;
+    
+    let inlineStyle = ""; 
+    let specialClass = "";
+    const cellText = cell.toLowerCase();
 
-                    if (j > 1) {
-                        if (!isCurrentMonthViewed) {
-                            inlineStyle = "color: #64748b;"; // Szary dla nieaktywnych miesięcy
-                        } else {
-                            // Alarm dla dzisiejszego dnia po 15:30
-                            if (cellText.includes("8-16") && isToday && isAlarmTime) {
-                                specialClass = " alarm-pulse";
-                            }
-                            
-                            // Kolorowanie tylko 8-16
-                            if (cellText.includes("8-16")) {
-                                content = content.replace(/8-16/i, '<span class="neon-blue-text">8-16</span>');
-                            } else if (cellText.includes("parking") || cellText.includes("8:00")) {
-                                inlineStyle = "color: #64748b;"; // Szary dla parkingu
-                            }
-                        }
-                    }
-                    
-                    // Budujemy komórkę - jeśli nie ma inlineStyle, CSS weźmie domyślny biały
-                    html += `<td class="${className}${specialClass}">
-                                <div class="marquee-box">
-                                    <span style="${inlineStyle}">${content}</span>
-                                </div>
-                             </td>`;
-                }
-            });
+    // SPRAWDZANIE CZY WIERSZ NALEŻY DO WYBRANEGO MIESIĄCA
+    // row[1] to data w formacie RRRR-MM-DD
+    const rowDatePart = row[1] ? row[1].split("-") : null;
+    const rowMonth = rowDatePart ? rowDatePart[1] : null; 
+    const isCellInSelectedMonth = (rowMonth === currentViewMonth);
+
+    if (j > 1) {
+        // JEŚLI WIERSZ NIE JEST Z WYBRANEGO MIESIĄCA LUB OGLĄDAMY INNY MIESIĄC NIŻ OBECNY
+        if (!isCellInSelectedMonth) {
+            inlineStyle = "color: #64748b;"; // Wygaszenie (szary)
+        } else {
+            // Alarm dla dzisiejszego dnia po 15:30
+            if (cellText.includes("8-16") && isToday && isAlarmTime) {
+                specialClass = " alarm-pulse";
+            }
+            
+            // Kolorowanie tylko 8-16
+            if (cellText.includes("8-16")) {
+                content = content.replace(/8-16/i, '<span class="neon-blue-text">8-16</span>');
+            } else if (cellText.includes("parking") || cellText.includes("8:00")) {
+                inlineStyle = "color: #64748b;"; // Szary dla parkingu
+            }
+        }
+    } else {
+        // Dla kolumn Dzień i Data też stosujemy wygaszenie jeśli to inny miesiąc
+        if (!isCellInSelectedMonth) inlineStyle = "color: #475569;"; 
+    }
+    
+    html += `<td class="${className}${specialClass}">
+                <div class="marquee-box">
+                    <span style="${inlineStyle}">${content}</span>
+                </div>
+             </td>`;
+}            });
             html += "</tr>";
         });
         html += "</table>";
