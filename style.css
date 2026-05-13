@@ -7,7 +7,7 @@ body { margin: 0; background: #020617; color: white; font-family: Arial, sans-se
 .nav-btn.active { color: #00ff00; border-color: #00ff00; background: #064e3b; }
 
 .header {
-    height: 3vh;
+    height: 2vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
