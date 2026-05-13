@@ -56,7 +56,12 @@ th { background: #1e293b; text-transform: uppercase; padding: 2px; }
     box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.2);
 }
 
-/* Styl dla samej frazy 8-16 */
+/* Domyślny kolor dla tekstu wewnątrz komórek danych */
+.tech-data span {
+    color: #ffffff;
+}
+
+/* Klasa dla niebieskiego świecenia */
 .neon-blue-text {
     color: #00d2ff !important;
     text-shadow: 0 0 8px #0044ff, 0 0 15px #0044ff !important;
